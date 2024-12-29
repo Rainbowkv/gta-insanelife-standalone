@@ -4,7 +4,7 @@ local isFueling = false
 local currentFuel = 0.0
 local currentCost = 0.0
 local todaycost = 0
-local currentCash = QBCore.Functions.GetPlayerData().money['cash']
+local currentCash = 0
 local fuelSynced = false
 local inBlacklisted = false
 
@@ -84,6 +84,10 @@ CreateThread(function()
 end)
 
 local extraCost = math.random(3, 6)
+
+RegisterNetEvent('QBCore:Client:OnPlayerLoaded', function()
+    currentCash = QBCore.Functions.GetPlayerData().money['cash']
+end)
 
 AddEventHandler('fuel:startFuelUpTick', function(pumpObject, ped, vehicle)
 	currentFuel = GetVehicleFuelLevel(vehicle)
